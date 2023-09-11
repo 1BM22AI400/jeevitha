@@ -1,0 +1,44 @@
+%matplotlib inline
+from math import pi, sin, cos
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Define the coordinates of the points
+coords = np.array([[0, 0], [0.5, 0.5], [0.5, 1.5], [0, 1], [0, 0]])
+coords = coords.transpose()
+
+# Separate x and y coordinates
+x = coords[0, :]
+y = coords[1, :]
+
+# Define the rotation matrix C
+theta = pi / 6
+C = np.array([[cos(theta), -sin(theta)], [sin(theta), cos(theta)]])
+
+# Apply the rotation transformation to the coordinates
+C_coords = C @ coords
+
+# Separate x and y coordinates of the rotated points
+x_LT5 = C_coords[0, :]
+y_LT5 = C_coords[1, :]
+
+# Create the figure and axes objects
+fig, ax = plt.subplots()
+
+# Plot the original points in red and rotated points in blue
+ax.plot(x, y, 'ro')
+ax.plot(x_LT5, y_LT5, 'bo')
+
+# Connect the points by lines (original points in red dashed lines, rotated points in blue lines)
+ax.plot(x, y, 'r', ls="--")
+ax.plot(x_LT5, y_LT5, 'b')
+
+# Edit some settings for the plot
+ax.axvline(x=0, color="k", ls=":")
+ax.axhline(y=0, color="k", ls=":")
+ax.grid(True)
+ax.axis([-1.5, 1.5, -1.5, 1.6])
+ax.set_aspect('equal')
+
+# Show the plot
+plt.show()
