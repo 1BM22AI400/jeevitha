@@ -1,0 +1,40 @@
+from sympy import *
+from numpy import *
+
+# Define the matrix A
+A = Matrix([[1, 2, 3, 1], [4, 8, 12, 4], [3, 6, 9, 3]])
+
+# Display the given matrix
+display("Given matrix:", A)
+
+# Calculate the dimensions and rank of A
+[m, n] = shape(A)
+r = A.rank()
+
+# Print the rank and nullity
+print('Rank of the linear transformation =', r)
+NullSpace = A.nullspace()
+nullity = len(NullSpace)
+print('Nullity of the linear transformation =', nullity)
+
+# Check if the Rank-Nullity theorem holds
+if r + nullity == n:
+    print("Rank-Nullity theorem holds.")
+else:
+    print("Rank-Nullity theorem does not hold.")
+
+# Compute eigenvalues and eigenvectors using NumPy
+A_np = matrix([[1, 2, 3], [0, 5, 9], [0, 0, 1]])
+eigenvalues_np, eigenvectors_np = linalg.eig(A_np)
+print("Eigenvalues and their corresponding eigenvectors (NumPy):")
+print(eigenvalues_np)
+print(eigenvectors_np)
+
+# Compute eigenvalues and eigenvectors using SymPy
+A_sympy = Matrix([[1, 2, 3], [0, 5, 9], [0, 0, 1]])
+eigenvalues_sympy = A_sympy.eigenvals()
+eigenvectors_sympy = A_sympy.eigenvects()
+print("Eigenvalues (SymPy):")
+pprint(eigenvalues_sympy)
+print("Eigenvectors (SymPy):")
+pprint(eigenvectors_sympy)
